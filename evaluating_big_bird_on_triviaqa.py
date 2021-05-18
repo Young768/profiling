@@ -30,8 +30,9 @@ Install `transformers` & `datasets`.
 # !pip install datasets==1.5.0
 # !pip install git+https://github.com/vasudevgupta7/transformers.git@add_big_bird # TODO: replace with new pip version eventually
 # 
-# import datasets
-# import torch
+import datasets
+import torch
+import torch.autograd.profiler as profiler
 
 """### Data Preprocessing & Cleaning
 
@@ -42,7 +43,7 @@ Afterwards the data is serialized in *Arrow* format, so that subsequent call can
 **Note**: If you want to evaluate *BigBird* on the full validation set this notebook will run for *ca.* 6 hours ⌛. On 5% of the data it takes around 30 minutes.
 """
 
-validation_dataset = datasets.load_dataset("trivia_qa", "rc", split="validation[:5%]")  # remove [:5%] to run on full validation set
+validation_dataset = datasets.load_dataset("trivia_qa", "rc", split="validation[:1%]")  # remove [:5%] to run on full validation set
 
 """First, let's get an overview of the dataset 🧐."""
 
@@ -270,7 +271,7 @@ with profiler.profile(record_shapes=True, use_cuda=True, profile_memory=True) as
         #model(inputs)
         results = validation_dataset.map(evaluate)
 
-print(prof.key_averages().table(sort_by="cpu_time_total"))
+print(prof.key_averages().table(row_limit=100))
 """Finally, let's print out the score."""
 
 print("Exact Match (EM): {:.2f}".format(100 * sum(results['match'])/len(results)))
