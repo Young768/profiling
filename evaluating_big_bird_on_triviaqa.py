@@ -145,8 +145,8 @@ It's time to evaluate *BigBird* on *TriviaQA* 🚀. `BigBirdTokenizer` requires 
 from transformers import BigBirdTokenizer, BigBirdForQuestionAnswering
 
 tokenizer = BigBirdTokenizer.from_pretrained("google/bigbird-base-trivia-itc")
-model = BigBirdForQuestionAnswering.from_pretrained("google/bigbird-base-trivia-itc").to("cuda")
-
+model = BigBirdForQuestionAnswering.from_pretrained("google/bigbird-base-trivia-itc", num_random_blocks=2, block_size=16).to("cuda")
+#model = BigBirdForQuestionAnswering.from_pretrained("google/bigbird-base-trivia-itc", attention_type="original_full").to("cuda")
 """
 Next, we will write the evaluation function. Google's official evaluation scripts for *TriviaQA* includes many improvements to make sure that:
 
@@ -208,6 +208,9 @@ Finally, we create normalized aliases for both the predicted answer and the labe
 """
 
 def evaluate(example):
+    start = torch.cuda.Event(enable_timing=True)
+    end = torch.cuda.Event(enable_timing=True)
+    start.record()
     # encode question and context so that they are seperated by a tokenizer.sep_token and cut at max_length
     encoding = tokenizer(example["question"], example["context"], return_tensors="pt", max_length=4096, padding="max_length", truncation=True)
     input_ids = encoding.input_ids.to("cuda")
@@ -230,6 +233,13 @@ def evaluate(example):
     # if there is a common element, it's a match
     example["match"] = len(list(answers & predictions)) > 0
 
+    end.record()
+    torch.cuda.synchronize()
+    torch_elapsed = start.elapsed_time(end) / 1e3
+    #qps = num_iter / torch_elapsed
+    time_consume = torch_elapsed
+    print("time consume: ", time_consume)
+
     return example
 
 """To begin with, we are interested in the performance of the model on short and long samples.
@@ -238,19 +248,19 @@ Let's evaluate the model on tnhe `short_validation_dataset`.
 **Note**: This function is expected to run for *ca.* 1h if the full dataset is used ⌛
 """
 
-results_short = short_validation_dataset.map(evaluate)
+#results_short = short_validation_dataset.map(evaluate)
 
 """Alright, let's see the result. We report all results as "Exact Match" which is just the ration of correctly answered questions to all questions."""
 
-print("Exact Match (EM): {:.2f}".format(100 * sum(results_short['match'])/len(results_short)))
+#print("Exact Match (EM): {:.2f}".format(100 * sum(results_short['match'])/len(results_short)))
 
 """105/127 = 82.68 => pretty good 🔥. Let's take a look at the wrong examples.
 For this we first filter out the correct examples and then print them out.
 """
 
-wrong_results = results_short.filter(lambda x: x['match'] is False)
-print(f"\nWrong examples: ")
-print_out = wrong_results.map(lambda x, i: print(f"{i} - Output: {x['output']} - Target: {x['norm_target']}"), with_indices=True)
+#wrong_results = results_short.filter(lambda x: x['match'] is False)
+#print(f"\nWrong examples: ")
+#print_out = wrong_results.map(lambda x, i: print(f"{i} - Output: {x['output']} - Target: {x['norm_target']}"), with_indices=True)
 
 """Ok! Except for the wrong answer no. 15: *George III* vs. *george*, where the model arguably gave a correct answer, incorrectly rated model predictions are in fact very much wrong.
 
@@ -266,12 +276,12 @@ function ConnectButton(){
 setInterval(ConnectButton,60000);
 ```
 """
-with profiler.profile(record_shapes=True, use_cuda=True, profile_memory=True) as prof:
-    with profiler.record_function("model_inference"):
+#with profiler.profile(record_shapes=True, use_cuda=True, profile_memory=True) as prof:
+#    with profiler.record_function("model_inference"):
         #model(inputs)
-        results = validation_dataset.map(evaluate)
+results = validation_dataset.map(evaluate)
 
-print(prof.key_averages().table(row_limit=100))
+#print(prof.key_averages().table(row_limit=100))
 """Finally, let's print out the score."""
 
 print("Exact Match (EM): {:.2f}".format(100 * sum(results['match'])/len(results)))
