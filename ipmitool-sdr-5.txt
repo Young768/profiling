@@ -1,0 +1,78 @@
+CPU1 Temp        | 01h | ok  |  3.1 | 25 degrees C
+CPU2 Temp        | 02h | ok  |  3.2 | 25 degrees C
+Inlet Temp       | 09h | ok  |  7.0 | 18 degrees C
+PCH Temp         | 0Ah | ok  |  7.1 | 36 degrees C
+System Temp      | 0Bh | ok  |  7.2 | 20 degrees C
+Peripheral Temp  | 0Ch | ok  |  7.3 | 34 degrees C
+MB_10G Temp      | 0Dh | ok  |  7.4 | 40 degrees C
+VRMCpu1 Temp     | 10h | ok  |  7.16 | 27 degrees C
+VRMCpu1IO Temp   | 11h | ok  |  7.17 | 26 degrees C
+VRMCpu2 Temp     | 13h | ok  |  7.19 | 25 degrees C
+VRMCpu2IO Temp   | 14h | ok  |  7.20 | 24 degrees C
+VRMP1ABC Temp    | 16h | ok  |  7.22 | 24 degrees C
+VRMP1DEF Temp    | 17h | ok  |  7.23 | 24 degrees C
+VRMP2ABC Temp    | 18h | ok  |  7.24 | 24 degrees C
+VRMP2DEF Temp    | 19h | ok  |  7.25 | 24 degrees C
+P1-DIMMA1 Temp   | B0h | ok  | 32.0 | 22 degrees C
+P1-DIMMA2 Temp   | B1h | ns  | 32.1 | No Reading
+P1-DIMMB1 Temp   | B2h | ok  | 32.2 | 21 degrees C
+P1-DIMMB2 Temp   | B3h | ns  | 32.3 | No Reading
+P1-DIMMC1 Temp   | B4h | ns  | 32.4 | No Reading
+P1-DIMMC2 Temp   | B5h | ns  | 32.5 | No Reading
+P1-DIMMD1 Temp   | B6h | ok  | 32.6 | 21 degrees C
+P1-DIMMD2 Temp   | B7h | ns  | 32.7 | No Reading
+P1-DIMME1 Temp   | B8h | ok  | 32.8 | 21 degrees C
+P1-DIMME2 Temp   | B9h | ns  | 32.9 | No Reading
+P1-DIMMF1 Temp   | BAh | ns  | 32.10 | No Reading
+P1-DIMMF2 Temp   | BBh | ns  | 32.11 | No Reading
+P2-DIMMA1 Temp   | D0h | ok  | 32.16 | 21 degrees C
+P2-DIMMA2 Temp   | D1h | ns  | 32.17 | No Reading
+P2-DIMMB1 Temp   | D2h | ok  | 32.18 | 20 degrees C
+P2-DIMMB2 Temp   | D3h | ns  | 32.19 | No Reading
+P2-DIMMC1 Temp   | D4h | ns  | 32.20 | No Reading
+P2-DIMMC2 Temp   | D5h | ns  | 32.21 | No Reading
+P2-DIMMD1 Temp   | D6h | ok  | 32.22 | 21 degrees C
+P2-DIMMD2 Temp   | D7h | ns  | 32.23 | No Reading
+P2-DIMME1 Temp   | D8h | ok  | 32.24 | 21 degrees C
+P2-DIMME2 Temp   | D9h | ns  | 32.25 | No Reading
+P2-DIMMF1 Temp   | DAh | ns  | 32.26 | No Reading
+P2-DIMMF2 Temp   | DBh | ns  | 32.27 | No Reading
+FAN1             | 41h | ok  | 29.1 | 3300 RPM
+FAN2             | 42h | ok  | 29.2 | 3200 RPM
+FAN3             | 43h | ok  | 29.3 | 3300 RPM
+FAN4             | 44h | ok  | 29.4 | 3200 RPM
+FAN5             | 45h | ok  | 29.5 | 3200 RPM
+FAN6             | 46h | ok  | 29.6 | 3200 RPM
+FAN7             | 47h | ok  | 29.7 | 3200 RPM
+FAN8             | 48h | ok  | 29.8 | 3200 RPM
+FAN9             | 49h | ok  | 29.9 | 3800 RPM
+FAN10            | 4Ah | ok  | 29.10 | 3800 RPM
+12V              | 30h | ok  |  7.32 | 12.43 Volts
+5VCC             | 31h | ok  |  7.33 | 5.15 Volts
+3.3VCC           | 32h | ok  |  7.34 | 3.47 Volts
+VBAT             | 33h | ok  | 40.0 | Presence Detected
+Vcpu1            | 34h | ok  |  3.20 | 1.80 Volts
+Vcpu2            | 35h | ok  |  3.21 | 1.80 Volts
+VDimmP1ABC       | 36h | ok  |  8.38 | 1.24 Volts
+VDimmP1DEF       | 37h | ok  |  8.39 | 1.24 Volts
+VDimmP2ABC       | 38h | ok  |  8.40 | 1.24 Volts
+VDimmP2DEF       | 39h | ok  |  8.41 | 1.24 Volts
+5VSB             | 3Ah | ok  |  7.42 | 5.18 Volts
+3.3VSB           | 3Bh | ok  |  7.43 | 3.47 Volts
+1.8V PCH         | 3Ch | ok  |  7.44 | 1.85 Volts
+PVNN PCH         | 3Dh | ok  |  7.45 | 1.04 Volts
+1.05V PCH        | 3Eh | ok  |  7.46 | 1.07 Volts
+Chassis Intru    | AAh | ok  | 23.0 | General Chassis intrusion
+PS1 Status       | C4h | ok  | 10.92 | Presence detected
+PS2 Status       | C5h | ok  | 10.91 | Presence detected
+PS3 Status       | C6h | ok  | 10.90 | Presence detected
+PS4 Status       | C7h | ok  | 10.89 | Presence detected
+GPU1 Temp        | 70h | ok  | 11.1 | 25 degrees C
+GPU2 Temp        | 71h | ok  | 11.2 | 24 degrees C
+GPU3 Temp        | 72h | ok  | 11.3 | 25 degrees C
+GPU4 Temp        | 73h | ok  | 11.4 | 26 degrees C
+GPU6 Temp        | 75h | ok  | 11.6 | 24 degrees C
+GPU7 Temp        | 76h | ok  | 11.7 | 25 degrees C
+GPU8 Temp        | 77h | ok  | 11.8 | 26 degrees C
+GPU9 Temp        | 78h | ok  | 11.9 | 25 degrees C
+NVMe_SSD Temp    | 20h | ok  |  4.48 | 29 degrees C
